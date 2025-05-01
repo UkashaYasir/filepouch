@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FilePouch - Your Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0l7WQw12T0aXlGZbzJQaeB9KNdhE3NUnTQ3fzpZ+7D5y3S5y0w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #0f0f0f;
+      color: #f0f0f0;
+    }
+
+    header {
+      background-color: #1a1a1a;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #2c2c2c;
+    }
+
+    header h1 {
+      margin: 0;
+      color: #00bcd4;
+      font-size: 1.5rem;
+    }
+
+    nav a {
+      margin-left: 2rem;
+      color: #ccc;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    nav a.active {
+      color: #00bcd4;
+      font-weight: bold;
+    }
+
+    nav a:hover { color: #00bcd4; }
+
+    .upload-area {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background-color: #1e1e1e;
+      border: 2px dashed #333;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .upload-area label {
+      display: inline-block;
+      padding: 0.8rem 1.5rem;
+      background-color: #00bcd4;
+      color: #fff;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+
+    .upload-area input[type="file"] { display: none; }
+
+    .upload-area button {
+      margin-top: 1rem;
+      background-color: #00bcd4;
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .upload-area button:hover { background-color: #009cb0; }
+
+    .file-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .file-card {
+      background-color: #1c1c1c;
+      border: 1px solid #2c2c2c;
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0, 188, 212, 0.1);
+      transition: transform 0.2s ease, border-color 0.2s;
+    }
+
+    .file-card:hover {
+      transform: scale(1.03);
+      border-color: #00bcd4;
+    }
+
+    .file-card img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      margin-bottom: 0.5rem;
+    }
+
+    .file-name {
+      margin-bottom: 0.5rem;
+      word-break: break-word;
+    }
+
+    .file-actions {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .file-actions a,
+    .file-actions form button {
+      background-color: #00bcd4;
+      color: white;
+      border: none;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .file-actions a:hover,
+    .file-actions form button:hover {
+      background-color: #009cb0;
+    }
+
+    .selected-files {
+      margin-top: 1rem;
+      padding: 0.5rem;
+      background-color: #333;
+      border-radius: 6px;
+      color: #fff;
+      text-align: left;
+    }
+  </style>
+
+  <script>
+    function displayFileNames(event) {
+      const fileInput = event.target;
+      const fileList = fileInput.files;
+      const display = document.getElementById('fileNames');
+      display.innerHTML = "";
+
+      if (fileList.length > 0) {
+        const names = Array.from(fileList).map(file => file.name);
+        display.innerHTML = "Selected Files:<br>" + names.join('<br>');
+      } else {
+        display.innerHTML = "No files selected";
+      }
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Welcome, {{ user.name }}!</h1>
+    <nav>
+      <a href="{{ url_for('dashboard') }}" class="active">Dashboard</a>
+      <a href="{{ url_for('reviews') }}">Reviews</a>
+      <a href="{{ url_for('contact') }}">Contact</a>
+      <a href="{{ url_for('home') }}">About</a>
+      <a href="{{ url_for('logout') }}">Logout</a>
+    </nav>
+  </header>
+
+  <div class="upload-area">
+    <form action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
+      <label for="file">Select File
+        <input type="file" name="file" id="file" onchange="displayFileNames(event)">
+      </label>
+      <div id="fileNames" class="selected-files">No files selected</div>
+      <br>
+      <button type="submit"><i class="fa fa-upload"></i> Upload</button>
+    </form>
+  </div>
+
+  <div class="file-grid">
+    {% for file in files %}
+      <div class="file-card">
+        {% set ext = file.file_name.rsplit('.', 1)[-1].lower() %}
+        {% if ext in ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg'] %}
+          <img src="{{ file.file_path }}" alt="preview">
+        {% elif ext == 'pdf' %}
+          <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="pdf">
+        {% elif ext in ['doc', 'docx'] %}
+          <img src="https://cdn-icons-png.flaticon.com/512/732/732052.png" alt="doc">
+        {% elif ext in ['ppt', 'pptx'] %}
+          <img src="https://cdn-icons-png.flaticon.com/512/888/888878.png" alt="ppt">
+        {% elif ext in ['zip', 'rar'] %}
+          <img src="https://cdn-icons-png.flaticon.com/512/888/888853.png" alt="zip">
+        {% else %}
+          <img src="https://cdn-icons-png.flaticon.com/512/833/833524.png" alt="file">
+        {% endif %}
+
+        {% set clean_name = file.file_name.split('_', 1)[1] if '_' in file.file_name else file.file_name %}
+        <div class="file-name">{{ clean_name }}</div>
+
+        <div class="file-actions">
+          <a href="{{ file.file_path }}" target="_blank"><i class="fa fa-eye"></i> Preview</a>
+          <a href="https://drive.google.com/uc?id={{ file.drive_file_id }}&export=download" target="_blank"><i class="fa fa-download"></i> Download</a>
+          <form action="{{ url_for('delete_file', file_id=file.id) }}" method="POST" style="display:inline;">
+            <button type="submit" onclick="return confirm('Are you sure you want to delete this file?');"><i class="fa fa-trash"></i> Delete</button>
+          </form>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up - FilePouch</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #121212;
+      color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .signup-container {
+      background-color: #1e1e1e;
+      padding: 2.5rem;
+      border-radius: 16px;
+      box-shadow: 0 0 30px rgba(0, 188, 212, 0.15);
+      width: 100%;
+      max-width: 420px;
+    }
+    .signup-container h2 {
+      color: #00bcd4;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+    }
+    label {
+      display: block;
+      margin-top: 1.2rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    input {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #333;
+      border-radius: 10px;
+      background-color: #2a2a2a;
+      color: #f0f0f0;
+      font-size: 0.95rem;
+    }
+    input:focus {
+      outline: none;
+      border-color: #00bcd4;
+    }
+    button {
+      width: 100%;
+      padding: 0.8rem;
+      margin-top: 2rem;
+      border: none;
+      border-radius: 10px;
+      background-color: #00bcd4;
+      color: white;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background-color: #00acc1;
+    }
+    p {
+      text-align: center;
+      margin-top: 1.2rem;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+    a {
+      color: #00bcd4;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="signup-container">
+    <h2>Create Your Account</h2>
+    <form method="POST" action="/signup">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" required placeholder="Enter your username" />
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required placeholder="you@example.com" />
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required placeholder="Create a password" />
+      <label for="confirm_password">Confirm Password</label>
+      <input type="password" id="confirm_password" name="confirm_password" required placeholder="Repeat your password" />
+      <button type="submit">Sign Up</button>
+    </form>
+    <p>Already have an account? <a href="/login">Login</a></p>
+  </div>
+</body>
+</html>

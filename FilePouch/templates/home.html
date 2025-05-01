@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to FilePouch</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #121212;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background-color: #1e1e1e;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 999;
+      width: 100%;
+    }
+
+    header h1 {
+      color: #00bcd4;
+      font-size: 2rem;
+      text-transform: uppercase;
+    }
+
+    nav a {
+      margin-left: 2rem;
+      color: #ccc;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #00bcd4;
+    }
+
+    .hero {
+      height: 100vh;
+      background: url('https://via.placeholder.com/1500x800') no-repeat center center/cover;
+      background-attachment: fixed;
+      text-align: center;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero h2 {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      font-weight: bold;
+      text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
+    }
+
+    .hero p {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero a {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background-color: #00bcd4;
+      color: #fff;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .hero a:hover {
+      background-color: #00acc1;
+      transform: scale(1.1);
+    }
+
+    .section {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 3rem;
+      position: relative;
+    }
+
+    .section:nth-child(even) {
+      background-color: #1e1e1e;
+    }
+
+    .section:nth-child(odd) {
+      background-color: #2b2b2b;
+    }
+
+    .section h3 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #00bcd4;
+    }
+
+    .section p {
+      color: #bbb;
+      font-size: 1.1rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+
+    .feature-card {
+      background-color: #1e1e1e;
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 0 12px rgba(0, 188, 212, 0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 20px rgba(0, 188, 212, 0.2);
+      background: #2a2a2a;
+    }
+
+    .feature-card h3 {
+      color: #00bcd4;
+      margin-bottom: 1rem;
+    }
+
+    .feature-card p {
+      color: #bbb;
+      font-size: 1rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: #888;
+      font-size: 1rem;
+      background-color: #1e1e1e;
+      border-top: 1px solid #2a2a2a;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      animation: fadeIn 1.5s ease-out;
+    }
+
+    /* Scroll Effects */
+    .parallax {
+      background: url('https://via.placeholder.com/1500x800') no-repeat center center/cover;
+      background-attachment: fixed;
+      height: 100vh;
+    }
+
+    .cta-section {
+      text-align: center;
+      background-color: #00bcd4;
+      padding: 3rem;
+      color: #fff;
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 600px) {
+      .hero h2 {
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>FilePouch</h1>
+    <nav class="navbar">
+      <ul style="display: flex; justify-content: center; gap: 2rem; list-style: none; padding: 1rem 0; background-color: #1e1e1e; margin: 0;">
+        <li><a href="{{ url_for('home') }}" style="color: #00bcd4; text-decoration: none;">Home</a></li>
+        <li><a href="{{ url_for('signup') }}" style="color: #00bcd4; text-decoration: none;">Sign Up</a></li>
+        <li><a href="{{ url_for('contact') }}" style="color: #00bcd4; text-decoration: none;">Contact</a></li>
+        <li><a href="{{ url_for('reviews') }}" style="color: #00bcd4; text-decoration: none;">Reviews</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div>
+      <h2>Your Secure Personal File Vault</h2>
+      <p>Upload, organize, and access your files privately using your own device. No cloud, full control.</p>
+      <!-- Link to sign up page -->
+      <a href="/signup">Get Started</a>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="section fade-in" id="features">
+    <h3>Our Features</h3>
+    <div class="features">
+      <div class="feature-card">
+        <h3>Private Storage</h3>
+        <p>Keep your files on your own HDD with no third-party cloud dependency.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Upload & Share</h3>
+        <p>Upload files easily and share them across your devices without expiry limits.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Preview & Organize</h3>
+        <p>View images, PDFs, and audio before downloading. Create folders and rename files.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Secure & Responsive</h3>
+        <p>SSL-secured, mobile-friendly interface with local database encryption (SQLite).</p>
+      </div>
+      <div class="feature-card">
+        <h3>Activity Dashboard</h3>
+        <p>Track your recent uploads, downloads, and storage statistics in one view.</p>
+      </div>
+      <div class="feature-card">
+        <h3>One-Click Download</h3>
+        <p>Download individual files or entire folders with a single click.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Parallax Section -->
+  <section class="parallax"></section>
+
+  <!-- Call to Action -->
+  <section class="cta-section">
+    <h3>Ready to Experience Secure Storage?</h3>
+    <p>Join FilePouch today and enjoy full control over your files.</p>
+    <!-- Link to Contact Us page -->
+    <a href="/contact">Contact Us</a>
+  </section>
+
+  <footer>
+    &copy; 2025 FilePouch.codes | All Rights Reserved
+  </footer>
+</body>
+
+</html>

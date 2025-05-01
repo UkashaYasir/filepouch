@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About - FilePouch</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0f0f0f;
+      color: #f0f0f0;
+      margin: 0;
+      transition: margin-left 0.3s ease;
+      overflow-x: hidden; /* Prevent horizontal scroll */
+    }
+
+    /* Sidebar Styling */
+    .sidebar {
+      background-color: #1a1a1a;
+      width: 250px;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: -250px; /* Initially hide the sidebar */
+      padding-top: 20px;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+      transition: left 0.3s ease; /* Smooth transition when opening and closing */
+    }
+
+    .sidebar.open {
+      left: 0; /* Show sidebar when open */
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      color: #00bcd4;
+      margin-bottom: 20px;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 15px;
+      color: #ccc;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid #333;
+      transition: background-color 0.3s;
+    }
+
+    .sidebar a:hover {
+      background-color: #333;
+      color: #fff;
+    }
+
+    /* Main Content Area */
+    .main-content {
+      margin-left: 0;
+      padding: 2rem;
+    }
+
+    header {
+      background-color: #1a1a1a;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #2c2c2c;
+    }
+
+    header h1 {
+      color: #00bcd4;
+      margin: 0;
+    }
+
+    .main-section {
+      max-width: 1200px;
+      margin: 4rem auto;
+      padding: 2rem;
+      background-color: #1e1e1e;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .main-section h2 {
+      font-size: 2rem;
+      color: #00bcd4;
+      margin-bottom: 1rem;
+    }
+
+    .main-section p {
+      color: #ddd;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      text-align: justify;
+    }
+
+    footer {
+      background-color: #1a1a1a;
+      padding: 2rem 1rem;
+      text-align: center;
+      color: #888;
+      font-size: 0.85rem;
+      border-top: 1px solid #2c2c2c;
+      margin-top: 4rem;
+    }
+
+    @media (max-width: 768px) {
+      .main-content {
+        margin-left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <h2>FilePouch</h2>
+    <a href="index.html">Dashboard</a>
+    <a href="about.html">About</a>
+    <a href="#">Contact</a>
+    <a href="#">Logout</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content" id="content">
+    <header>
+      <h1>FilePouch</h1>
+    </header>
+
+    <section class="main-section">
+      <h2>About FilePouch</h2>
+      <p>Welcome to FilePouch, a modern and secure digital storage solution designed to help you easily upload, manage, and access your files from anywhere. Whether you're storing personal documents, images, or other important data, FilePouch offers a simple and intuitive interface to help you stay organized.</p>
+      <p>Our mission is to provide users with a seamless, user-friendly experience for managing their files securely in the cloud. With a focus on speed, security, and simplicity, FilePouch ensures your files are always accessible and protected.</p>
+    </section>
+
+    <footer>
+      &copy; 2025 FilePouch. All rights reserved.
+    </footer>
+  </div>
+
+  <script>
+    const sidebar = document.getElementById('sidebar');
+
+    // Function to open sidebar
+    function openSidebar() {
+      sidebar.classList.add('open');
+    }
+
+    // Function to close sidebar
+    function closeSidebar() {
+      sidebar.classList.remove('open');
+    }
+
+    // Open sidebar when hovering over the sidebar area
+    sidebar.addEventListener('mouseenter', openSidebar);
+
+    // Close sidebar when mouse leaves the sidebar area
+    sidebar.addEventListener('mouseleave', closeSidebar);
+
+    // Ensure the sidebar stays open on hover
+    document.body.addEventListener('mouseover', function(event) {
+      if (!sidebar.contains(event.target)) {
+        closeSidebar();
+      }
+    });
+  </script>
+
+</body>
+</html>
